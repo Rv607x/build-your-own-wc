@@ -18,7 +18,10 @@ class Ccwc:
             return len(file_content)
 
     def number_of_words(self):
-        pass
+        """test doc"""
+        with open(self.path, "r", encoding="utf-8") as file:
+            file_content = file.read()
+        return len(file_content.split())
 
     def number_of_chars(self):
         """test doc"""
@@ -39,3 +42,4 @@ txt_file = Ccwc("test.txt")
 print(txt_file.number_of_lines())
 print(txt_file.number_of_bytes())
 print(txt_file.number_of_chars())
+print(txt_file.number_of_words())
