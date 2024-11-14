@@ -80,16 +80,12 @@ class Ccwc:
         Returns:
             int: The number of characters in the file
         """
-        with open(
-            self.path, "rb"
-        ) as file:  # Open in binary mode to handle all bytes directly
-            file_content = file.read()
-        # Decode the content, ignoring any BOM or unusual markers
-        text = file_content.decode("utf-8-sig")
-        num_of_chars = len(text)
-        if file_content.endswith(b"\n") and not text.endswith("\n"):
-            num_of_chars += 1
-        return num_of_chars
+        char_count = 0
+        with open(self.path) as file:
+            for line in file:
+                char_count += len(line)
+                char_count += 1
+        return char_count
 
     def default_mode(self):
         """Provide a default analysis of the file including bytes, lines, and words.
@@ -115,7 +111,7 @@ def main():
         -l: Count lines
         -w: Count words
         -m: Count characters
-        No flag: Show default analysis (bytes, lines, words)
+        No flag: Show default analysis (bytes, lines, words and file name)
     """
     parser = argparse.ArgumentParser(
         description="""ccwc - A clone of unix WC tool used to view count of words, characters,
