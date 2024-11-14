@@ -23,7 +23,6 @@ import argparse
 
 
 class Ccwc:
-
     """A command line word count tool that analyzes text files.
     This class provides functionality similar to Unix's wc command,
     allowing counting of bytes, lines, words, and characters in text files.
@@ -31,6 +30,7 @@ class Ccwc:
     Attributes:
         path (str): The file path to analyze
     """
+
     def __init__(self, path):
         """Initialize the Ccwc instance with a file path.
 
@@ -81,7 +81,7 @@ class Ccwc:
             int: The number of characters in the file
         """
         char_count = 0
-        with open(self.path) as file:
+        with open(self.path, "r", encoding="utf-8") as file:
             for line in file:
                 char_count += len(line)
                 char_count += 1
@@ -164,5 +164,7 @@ def main():
 
     else:
         print("Invalid command. Kindly use -help to see list of available commands")
+
+
 if __name__ == "__main__":
     main()
